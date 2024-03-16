@@ -53,8 +53,12 @@ const initialState = {
     },
   
     usersTasks:(state,{payload})=>{
-      state.userTasks=state.tasks.filter((item)=>item.assignedTo === payload);
-      localStorage.setItem('userTasks', JSON.stringify(state.userTasks));
+    // Filter tasks assigned to the specified user
+    const userTasks = state.tasks.filter((item) => item.assignedTo === payload);
+    
+    // Update localStorage
+    state.userTasks = userTasks;
+    localStorage.setItem('userTasks', JSON.stringify(userTasks));
     }
   },
   

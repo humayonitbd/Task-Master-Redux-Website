@@ -15,7 +15,7 @@ const Tasks = () => {
 const { tasks } = useSelector((state) => state.tasksSlice);
 console.log("tasks", tasks);
 const storeDatas = JSON.parse(localStorage.getItem("tasks")); 
-// console.log("localhostGetData", localhostGetData);
+console.log("localhostGetData", storeDatas);
 
 const pendingTasks = storeDatas?.filter((item) => item.status === "pending");
 const runningTasks = storeDatas?.filter((item) => item.status === "running");
