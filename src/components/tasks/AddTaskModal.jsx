@@ -21,7 +21,14 @@ const AddTaskModal = ({isOpen,setIsOpen}) => {
      }
      const onSubmit = (data) => {
        dispatch(addTask(data));
-        oncancel();
+       // Retrieve existing data from localStorage
+      //  const existingData = JSON.parse(localStorage.getItem("taskData")) || [];
+
+       // Append new data to existing data array
+      //  const updatedData = [...existingData, data];
+      //  localStorage.setItem("taskData", JSON.stringify(updatedData));
+
+       oncancel();
      }
     return (
       <Modal isOpen={isOpen} setIsOpen={setIsOpen} title="Programming Hero !">

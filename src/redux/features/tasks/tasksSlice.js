@@ -19,16 +19,28 @@ const initialState = {
   initialState,
   reducers: {
     addTask:(state,{payload})=>{
+       let updatedTasks = [];
       if(state.tasks.length  === 0){
-        state.tasks.push({id:1,status:"pending",...payload});
+        // state.tasks.push({id:1,status:"pending",...payload});
+        updatedTasks = [{ id: 1, status: "pending", ...payload }];
+        
       }else{
        const lastElement = state.tasks.at(-1);
-       state.tasks.push({id:lastElement.id +1,status:"pending", ...payload});
+      //  state.tasks.push({id:lastElement.id +1,status:"pending", ...payload});
+      updatedTasks = [...state.tasks, { id: lastElement.id + 1, status: "pending", ...payload }];
+  
       }
+
+       // Update state
+      state.tasks = updatedTasks;
+
+      // Update localStorage
+      localStorage.setItem('tasks', JSON.stringify(updatedTasks));
       
     },
     removeTask:(state,{payload})=>{
     state.tasks = state.tasks.filter((item)=>item.id !== payload);
+    localStorage.setItem('tasks', JSON.stringify(state.tasks));
   },
   updateStatus: (state, { payload }) => {
       const { id, status } = payload;
@@ -37,10 +49,12 @@ const initialState = {
       if (targetTask) {
         targetTask.status = status;
       }
+      localStorage.setItem('tasks', JSON.stringify(state.tasks));
     },
   
     usersTasks:(state,{payload})=>{
       state.userTasks=state.tasks.filter((item)=>item.assignedTo === payload);
+      localStorage.setItem('userTasks', JSON.stringify(state.userTasks));
     }
   },
   

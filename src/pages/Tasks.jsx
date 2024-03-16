@@ -13,11 +13,13 @@ const Tasks = () => {
   const [isOpen, setIsOpen]= useState(false)
 
 const { tasks } = useSelector((state) => state.tasksSlice);
-console.log(tasks);
+console.log("tasks", tasks);
+const storeDatas = JSON.parse(localStorage.getItem("tasks")); 
+// console.log("localhostGetData", localhostGetData);
 
-const pendingTasks = tasks.filter((item)=>item.status === "pending");
-const runningTasks = tasks.filter((item)=>item.status === "running");
-const doneTasks = tasks.filter((item)=>item.status === "done");
+const pendingTasks = storeDatas?.filter((item) => item.status === "pending");
+const runningTasks = storeDatas?.filter((item) => item.status === "running");
+const doneTasks = storeDatas?.filter((item) => item.status === "done");
 
 
 
@@ -57,11 +59,11 @@ const doneTasks = tasks.filter((item)=>item.status === "done");
             <div className="flex sticky top-0 justify-between bg-[#D3DDF9] p-5 rounded-md mb-3">
               <h1>Up Next</h1>
               <p className="bg-primary text-white w-6 h-6 grid place-content-center rounded-md">
-                {pendingTasks.length}
+                {pendingTasks?.length}
               </p>
             </div>
             <div className="space-y-3">
-              {pendingTasks.map((item) => (
+              {pendingTasks?.map((item) => (
                 <TaskCard key={item.id} task={item} />
               ))}
             </div>
@@ -70,11 +72,11 @@ const doneTasks = tasks.filter((item)=>item.status === "done");
             <div className="flex sticky top-0 justify-between bg-[#D3DDF9] p-5 rounded-md mb-3">
               <h1>In Progress</h1>
               <p className="bg-primary text-white w-6 h-6 grid place-content-center rounded-md">
-                {runningTasks.length}
+                {runningTasks?.length}
               </p>
             </div>
             <div className="space-y-3">
-              {runningTasks.map((item) => (
+              {runningTasks?.map((item) => (
                 <TaskCard key={item.id} task={item} />
               ))}
             </div>
@@ -83,11 +85,11 @@ const doneTasks = tasks.filter((item)=>item.status === "done");
             <div className="flex sticky top-0 justify-between bg-[#D3DDF9] p-5 rounded-md mb-3">
               <h1>Completed</h1>
               <p className="bg-primary text-white w-6 h-6 grid place-content-center rounded-md">
-                {doneTasks.length}
+                {doneTasks?.length}
               </p>
             </div>
             <div className="space-y-3">
-              {doneTasks.map((item) => (
+              {doneTasks?.map((item) => (
                 <TaskCard key={item.id} task={item} />
               ))}
             </div>
