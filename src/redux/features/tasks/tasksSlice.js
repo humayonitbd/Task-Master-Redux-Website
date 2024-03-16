@@ -8,9 +8,10 @@ const initialState = {
     description:
       'We need a remove button in our task card. Meke the button red and use Heroicon for tashbin icon.',
     date: '2023-08-28',
-    assignedTo: 'Mir Hussain',
+    assignedTo: 'Humayon Forid',
     priority: 'high',
   }],
+  userTasks:[]
 }
 
  const tasksSlice = createSlice({
@@ -31,24 +32,22 @@ const initialState = {
   },
   updateStatus: (state, { payload }) => {
       const { id, status } = payload;
+      
       const targetTask = state.tasks.find(task => task.id === id);
       if (targetTask) {
         targetTask.status = status;
       }
     },
-  myWorkStatus: (state, { payload }) => {
-      const { id, status } = payload;
-      const targetMyTask = state.tasks.find(task => task.id === id);
-      if (targetMyTask) {
-        targetMyTask.status = status;
-      }
-    },
+  
+    usersTasks:(state,{payload})=>{
+      state.userTasks=state.tasks.filter((item)=>item.assignedTo === payload);
+    }
   },
   
   
 })
 
 // Action creators are generated for each case reducer function
-export const {addTask, removeTask , updateStatus,myWorkStatus } = tasksSlice.actions;
+export const {addTask, removeTask , updateStatus,myWorkStatus,usersTasks } = tasksSlice.actions;
 
 export default tasksSlice.reducer;

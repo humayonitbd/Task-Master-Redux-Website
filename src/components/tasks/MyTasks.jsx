@@ -2,10 +2,10 @@ import {
   CheckIcon,
   DocumentMagnifyingGlassIcon,
 } from '@heroicons/react/24/outline';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import TasksDetailsModal from './TasksDetailsModal';
-import { myWorkStatus } from '../../redux/features/tasks/tasksSlice';
+import {  updateStatus, usersTasks } from '../../redux/features/tasks/tasksSlice';
 
 const MyTasks = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -22,7 +22,20 @@ const MyTasks = () => {
   //   priority: 'high',
   // };
 
-  const {tasks} = useSelector((state)=>state.tasksSlice);
+  const { tasks, userTasks } = useSelector((state) => state.tasksSlice);
+
+  const { name:userName } = useSelector((state) => state.userSlice);
+
+  // console.log(name);
+
+  useEffect(() => {
+    dispatch(usersTasks(userName));
+  }, [userName, dispatch, tasks]);
+
+
+
+
+
 
   const openModal = (id)=>{
     // console.log("id", id);
@@ -38,7 +51,7 @@ const MyTasks = () => {
     <div>
       <h1 className="text-xl my-3">My Tasks</h1>
       <div className=" h-[750px] overflow-auto space-y-3">
-        {tasks.map((item) => (
+        {userTasks?.map((item) => (
           <div
             key={item.id}
             className="bg-secondary/10 rounded-md p-3 flex justify-between"
@@ -55,7 +68,7 @@ const MyTasks = () => {
 
               <button
                 onClick={() =>
-                  dispatch(myWorkStatus({ id: item.id, status: "done" }))
+                  dispatch(updateStatus({ id: item.id, status: "done" }))
                 }
                 className="grid place-content-center"
                 title="Done"
