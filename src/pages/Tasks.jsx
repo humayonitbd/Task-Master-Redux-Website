@@ -24,8 +24,8 @@ const doneTasks = storeDatas?.filter((item) => item.status === "done");
 
 
   return (
-    <div className="h-screen grid grid-cols-12">
-      <div className="col-span-9 px-10 pt-10">
+    <div className="min-h-screen grid grid-cols-1 lg:grid-cols-12">
+      <div className="lg:col-span-9 px-4 lg:px-10 pt-10">
         <div className="flex justify-between items-center">
           <div>
             <h1 className="font-semibold text-3xl">Tasks</h1>
@@ -44,7 +44,7 @@ const doneTasks = storeDatas?.filter((item) => item.status === "done");
               Add Task
             </button>
             <AddTaskModal isOpen={isOpen} setIsOpen={setIsOpen} />
-           
+
             <div className="h-10 w-10 rounded-xl overflow-hidden">
               <img
                 src="https://images.unsplash.com/photo-1528892952291-009c663ce843?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=644&q=80"
@@ -54,8 +54,8 @@ const doneTasks = storeDatas?.filter((item) => item.status === "done");
             </div>
           </div>
         </div>
-        <div className="grid grid-cols-3 gap-5 mt-10">
-          <div className="relative h-[800px] overflow-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 mt-10">
+          <div className="relative h-[800px] lg:h-auto overflow-auto">
             <div className="flex sticky top-0 justify-between bg-[#D3DDF9] p-5 rounded-md mb-3">
               <h1>Up Next</h1>
               <p className="bg-primary text-white w-6 h-6 grid place-content-center rounded-md">
@@ -68,7 +68,7 @@ const doneTasks = storeDatas?.filter((item) => item.status === "done");
               ))}
             </div>
           </div>
-          <div className="relative h-[800px] overflow-auto">
+          <div className="relative h-[800px] lg:h-auto overflow-auto">
             <div className="flex sticky top-0 justify-between bg-[#D3DDF9] p-5 rounded-md mb-3">
               <h1>In Progress</h1>
               <p className="bg-primary text-white w-6 h-6 grid place-content-center rounded-md">
@@ -81,7 +81,7 @@ const doneTasks = storeDatas?.filter((item) => item.status === "done");
               ))}
             </div>
           </div>
-          <div className="relative h-[800px] overflow-auto">
+          <div className="relative h-[800px] lg:h-auto overflow-auto">
             <div className="flex sticky top-0 justify-between bg-[#D3DDF9] p-5 rounded-md mb-3">
               <h1>Completed</h1>
               <p className="bg-primary text-white w-6 h-6 grid place-content-center rounded-md">
